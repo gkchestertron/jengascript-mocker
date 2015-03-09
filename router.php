@@ -19,13 +19,22 @@ $file = fopen(implode($path, '/'), 'r') or http_response_code(404);
 $file_data = fread($file, filesize(implode($path, '/')));
 fclose($file);
 
-// get
-if ($id) {
-    $data   = json_decode($file_data, true);
-    $model  = search($data, 'id', $id);
-    $result = json_encode($model);
-} else {
-    $result = $file_data;
+switch ($_SERVER['REQUEST_METHOD']) {
+case 'GET':
+    if ($id) {
+        $data   = json_decode($file_data, true);
+        $model  = search($data, 'id', $id);
+        $result = json_encode($model);
+    } else {
+        $result = $file_data;
+    }
+    break;
+case 'POST':
+    break;
+case 'PUT':
+    break;
+case 'DELETE':
+    break;
 }
 
 echo $result;
