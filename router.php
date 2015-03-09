@@ -23,8 +23,8 @@ fclose($file);
 if ($id) {
     $data   = json_decode($file_data);
     $model  = search($data, 'id', $id);
+    $model  = $data[0];
     $result = json_encode($model);
-    $result = $id;
 } else {
     $result = $file_data;
 }
