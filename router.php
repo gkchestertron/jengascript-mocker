@@ -33,7 +33,7 @@ case 'GET':
     if ($id) {
         $data   = json_decode($file_data, true);
         $model  = search($data, 'id', $id);
-        $result = json_encode($model);
+        $result = json_encode($model) or http_response_code(404);
     } else {
         $result = $file_data;
     }
