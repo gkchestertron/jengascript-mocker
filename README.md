@@ -1,5 +1,5 @@
 #JengaScript Instant API Mocker
-This API mocker is a quick and dirty development solution that mocks a RESTful API and allows CORS so that application front-ends can utilize it from anywhere. Allowing CORS on the client-side is trivial and this approach requires no integration (or code to remove) once the production API is ready.
+This API mocker is a quick and dirty development solution that mocks a RESTful JSON API and allows CORS so that application front-ends can utilize it from anywhere. Allowing CORS on the client-side is trivial and this approach requires no integration (or code to remove) once the production API is ready.
 
 ##Usage
 Drop the contents of this folder onto an apache server and add whatever dummy data you want in JSON files.
