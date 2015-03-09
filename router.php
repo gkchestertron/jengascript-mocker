@@ -108,13 +108,13 @@ class Request {
         case 'POST':
             $last_model = $this->data[sizeof($this->data) - 1];
             $model = $this->rq_params;
-            $model['id'] = $last_model['id'] + 1;
+            /* $model['id'] = $last_model['id'] + 1; */
             array_push($this->data, $model);
             $result = json_encode($this->data);
             $file = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $result;
+            $this->result = $model;
             break;
         case 'PUT':
             break;
