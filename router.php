@@ -33,6 +33,7 @@ class Request {
             $new_file = fopen($file_path . '.temp', 'w');
             
             $this->file_data = fread($old_file, filesize($file_path));
+            echo $this->file_data;
             fwrite($new_file, $this->file_data);
             fclose($old_file);
             fclose($new_file);
@@ -41,7 +42,6 @@ class Request {
             http_response_code(404);
         }
          
-        echo($file_path);
 
         $this->file_data = fread($file, filesize($file_path . '.temp'));
         fclose($file);
