@@ -46,7 +46,11 @@ case 'DELETE':
     break;
 }
 
-echo $result or http_response_code(404);
+if ($result) {
+    echo $result;
+} else {
+    http_response_code(404);
+}
 
 function search($array, $key, $value) {   
     foreach ($array as $subarray){  
