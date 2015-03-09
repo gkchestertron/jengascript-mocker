@@ -6,4 +6,5 @@ Drop the contents of this folder onto an apache server and add whatever dummy da
 Name these files according to the url you would like them to be accessible at (i.e. for an endpoint at /things/ add a file called things.json to the top directory).
 Copies will be created of each file with .temp appended. These files are used for POST, PUT, and DELETE requests without changing the original .json files. Deleting these .temp files will revert the output to the original spec from the .json files.
 The mocker also supports folders (i.e. for /things/little-things/ put a file called little-things.json inside a folder called things).
+
 See example at http://www.JengaScript.com/data/
