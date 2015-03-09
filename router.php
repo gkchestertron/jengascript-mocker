@@ -21,9 +21,8 @@ fclose($file);
 
 // get
 if ($id) {
-    $data   = json_decode($file_data);
+    $data   = json_decode($file_data, true);
     $model  = search($data, 'id', $id);
-    $model  = $data[0];
     $result = json_encode($model);
 } else {
     $result = $file_data;
