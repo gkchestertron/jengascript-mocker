@@ -42,7 +42,6 @@ class Request {
         } else {
             http_response_code(404);
         }
-         
 
         $this->file_data = fread($file, filesize($file_path . '.temp'));
         fclose($file);
@@ -53,7 +52,7 @@ class Request {
         switch ($this->rq_method) {
         case 'GET':
             if ($this->id) {
-                $model  = $this->search($this->data, 'id', $id);
+                $model  = $this->search($this->data, 'id', $this->id);
 
                 if ($model) {
                     $this->result = json_encode($model);
