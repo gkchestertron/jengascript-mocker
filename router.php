@@ -11,6 +11,7 @@ class Request {
     public $result = null;
     public $data;
     public $file_data;
+    public $file_path;
     public $id;
 
     public function __construct() {
@@ -33,10 +34,12 @@ class Request {
         if (file_exists($file_path . '.temp')) {
             $file = fopen($file_path . '.temp', 'r') or http_response_code(500);
         } else if (file_exists($file_path)) {
+            // get data from original file
             $old_file = fopen($file_path, 'r') or http_response_code(500);
             $this->file_data = fread($old_file, filesize($file_path));
             fclose($old_file);
 
+            // write to temp file
             $new_file = fopen($file_path . '.temp', 'w');
             fwrite($new_file, $this->file_data);
             fclose($new_file);
@@ -45,6 +48,7 @@ class Request {
             http_response_code(404);
         }
 
+        $this->file_path = $file_path . '.temp';
         $this->file_data = fread($file, filesize($file_path . '.temp'));
         fclose($file);
         $this->data = json_decode($this->file_data, true);
@@ -102,7 +106,14 @@ class Request {
             }
             break;
         case 'POST':
-            $this->result = json_encode($this->rq_params);
+            $last_model = $this->data[sizeof($this->data) - 1];
+            $model = json_encode($this->rq_params);
+            $model['id'] = $last_model['id'] + 1;
+            array_push($this->data, $model);
+            $result = json_encode($this->data);
+            $file = fopen($this->file_path . '.temp', 'w');
+            fwrite($file, $result);
+            fclose($file);
             break;
         case 'PUT':
             break;
