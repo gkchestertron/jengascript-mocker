@@ -41,6 +41,8 @@ class Request {
             http_response_code(404);
         }
          
+        echo($file_path);
+
         $this->file_data = fread($file, filesize($file_path . '.temp'));
         fclose($file);
         $this->data = json_decode($this->file_data, true);
