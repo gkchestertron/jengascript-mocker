@@ -50,7 +50,6 @@ class Request {
     
     public function processInput() {
         echo $this->file_data;
-        echo 'here';
         switch ($this->rq_method) {
         case 'GET':
             if ($this->id) {
