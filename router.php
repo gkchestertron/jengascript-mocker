@@ -133,8 +133,8 @@ class Request {
 
         case 'DELETE':
             $model = &$this->search($this->data, 'id', $this->id);
-            /* unset($model); */
-            $this->response = json_encode($this->data);
+            unset($model);
+            $this->result = json_encode($this->data);
             break;
         }
     }
