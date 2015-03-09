@@ -119,12 +119,12 @@ class Request {
             break;
 
         case 'PUT':
-            $model = &$this->search(&$this->data, 'id', $this->id);
+            $model = $this->search($this->data, 'id', $this->id);
 
             foreach ($this->rq_params as $key => $value) {
                 $model[$key] = $value;
             }
-
+            $this->data[$this->id_index] = $model;
             $result = json_encode($this->data);
             $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
@@ -145,9 +145,10 @@ class Request {
         }
     }
 
-    public function &search(&$array, $key, $value) {   
-        foreach ($array as $subarray){  
+    public function search($array, $key, $value) {   
+        foreach ($array as $index => $subarray){  
             if (isset($subarray[$key]) && $subarray[$key] == $value)
+                $this->id_index = $index;
                 return $subarray;       
         } 
     }
