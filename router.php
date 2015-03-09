@@ -107,7 +107,7 @@ class Request {
             break;
         case 'POST':
             $last_model = $this->data[sizeof($this->data) - 1];
-            $model = json_encode($this->rq_params);
+            $model = $this->rq_params;
             $model['id'] = $last_model['id'] + 1;
             array_push($this->data, $model);
             $result = json_encode($this->data);
