@@ -134,14 +134,22 @@ class Request {
         case 'DELETE':
             $model = &$this->search($this->data, 'id', $this->id);
             unset($model);
-            $this->result = json_encode($this->data);
+            $result = json_encode($this->data);
+            $file = fopen($this->file_path, 'w');
+            fwrite($file, $result);
+            fclose($file);
+            $this->result = 'DELETED';
             break;
         }
     }
 
     public function respond() {
         if (isset($this->result)) {
-            echo $this->result;
+            if ($this->result == 'DELETED') {
+                http_response_code(200);
+            } else {
+                echo $this->result;
+            }
         } else {
             http_response_code(404);
         }
