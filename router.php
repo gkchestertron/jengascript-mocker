@@ -121,15 +121,15 @@ class Request {
         case 'PUT':
             $model = $this->search($this->data, 'id', $this->id);
 
-            /* foreach ($model as $key => $value) { */
-            /*     $model[$key] = $value; */
-            /* } */
+            foreach ($model as $key => $value) {
+                $model[$key] = $value;
+            }
 
             $result = json_encode($this->data);
             $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = json_encode($model);
+            $this->result = $result;
             break;
 
         case 'DELETE':
