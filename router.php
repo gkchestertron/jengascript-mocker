@@ -119,7 +119,7 @@ class Request {
             break;
 
         case 'PUT':
-            $model = &$this->search($this->data, 'id', $this->id);
+            $model = &$this->search(&$this->data, 'id', $this->id);
 
             foreach ($this->rq_params as $key => $value) {
                 $model[$key] = $value;
