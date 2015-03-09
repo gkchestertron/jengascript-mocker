@@ -46,8 +46,8 @@ case 'DELETE':
     break;
 }
 
-if ($result) {
-    echo 'hello';
+if (isset($result)) {
+    echo gettype($result);
 } else {
     http_response_code(404);
 }
