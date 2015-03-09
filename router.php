@@ -15,8 +15,17 @@ $path = array_values($requestURI); // path as an array
 $id = array_pop($path); // get id or lack thereof
 $path[sizeof($path) - 1] = $path[sizeof($path) - 1] . '.json';
 
-$file = fopen(implode($path, '/'), 'r') or http_response_code(404);
-$file_data = fread($file, filesize(implode($path, '/')));
+$file_path = implode($path, '/');
+
+if (file_exists($file_path . '.temp')) {
+    $file = fopen($file_path. '.temp', 'r') or http_response_code(500);
+} else if (file_exists($file_path)) {
+    $file = fopen($file_path, 'r') or http_response_code(500);
+} else {
+    http_response_code(404);
+}
+ 
+$file_data = fread($file, filesize($file_path));
 fclose($file);
 
 switch ($_SERVER['REQUEST_METHOD']) {
