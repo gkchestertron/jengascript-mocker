@@ -114,7 +114,7 @@ class Request {
             $file = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $model;
+            $this->result = json_encode($model);
             break;
         case 'PUT':
             break;
