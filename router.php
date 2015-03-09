@@ -115,7 +115,7 @@ class Request {
             $file = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $result;
+            $this->result = $model;
             break;
 
         case 'PUT':
@@ -129,7 +129,7 @@ class Request {
             $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $result;
+            $this->result = $model;
             break;
 
         case 'DELETE':
