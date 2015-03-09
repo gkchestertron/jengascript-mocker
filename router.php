@@ -132,15 +132,19 @@ class Request {
             break;
 
         case 'DELETE':
-            $model = &$this->search($this->data, 'id', $this->id);
-            unset($model);
-            $result = json_encode($this->data);
-            $file = fopen($this->file_path, 'w');
+            $result = json_encode($this->remove($this->data, 'id', $this->id));
+            $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
             $this->result = 'DELETED';
             break;
         }
+    }
+
+    public function remove($array, $key, $value) {
+        array_filter($array, function($model) use ($key, $value) {
+            return $model[$key] != $value;
+        });
     }
 
     public function respond() {
