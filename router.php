@@ -4,7 +4,7 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 $request = new Request();
 class Request {
-    public $rq_uri    = explode('/', $_SERVER['REQUEST_URI']);;
+    public $rq_uri    = explode('/', $_SERVER['REQUEST_URI']);
     public $rq_method = $_SERVER['REQUEST_METHOD'];
     public $result    = null;
     public $data;
