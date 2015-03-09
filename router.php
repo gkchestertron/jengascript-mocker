@@ -3,6 +3,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 $request = new Request();
+
+echo file_exists('/data.json');
+
 class Request {
     public $rq_uri;
     public $rq_method;
@@ -26,11 +29,9 @@ class Request {
 
         $file_path = implode($path, '/');
 
-        echo $file_path;
         if (file_exists($file_path . '.temp')) {
             $file = fopen($file_path . '.temp', 'r') or http_response_code(500);
         } else if (file_exists($file_path)) {
-            echo 'here';
             $old_file = fopen($file_path, 'r') or http_response_code(500);
             $this->file_data = fread($old_file, filesize($file_path));
             fclose($old_file);
