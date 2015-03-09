@@ -4,8 +4,7 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 $request = new Request();
 
-echo file_exists('/data.json');
-echo 'some shit';
+echo file_exists('data.json');
 
 class Request {
     public $rq_uri;
@@ -26,6 +25,7 @@ class Request {
     public function getData() {
         $path = array_values($this->rq_uri); // path as an array
         $this->id = array_pop($path); // get id or lack thereof
+        array_shift($path);
         $path[sizeof($path) - 1] = $path[sizeof($path) - 1] . '.json';
 
         $file_path = implode($path, '/');
