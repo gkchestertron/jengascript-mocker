@@ -118,7 +118,7 @@ class Request {
             break;
         case 'PUT':
                 $model = $this->search($this->data, 'id', $this->id);
-                $model = $array_merge($model, $this->rq_params);
+                $model = array_merge($model, $this->rq_params);
                 $this->result = json_encode($this->data);
             break;
         case 'DELETE':
