@@ -27,15 +27,15 @@ class Request {
         $file_path = implode($path, '/');
 
         if (file_exists($file_path . '.temp')) {
+            echo 'here';
             $file = fopen($file_path . '.temp', 'r') or http_response_code(500);
         } else if (file_exists($file_path)) {
             $old_file = fopen($file_path, 'r') or http_response_code(500);
-            $new_file = fopen($file_path . '.temp', 'w');
-            
             $this->file_data = fread($old_file, filesize($file_path));
-            echo $this->file_data;
-            fwrite($new_file, $this->file_data);
             fclose($old_file);
+
+            $new_file = fopen($file_path . '.temp', 'w');
+            fwrite($new_file, $this->file_data);
             fclose($new_file);
             $file = fopen($file_path . '.temp', 'r') or http_response_code(500);
         } else {
