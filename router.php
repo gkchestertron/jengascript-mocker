@@ -126,10 +126,10 @@ class Request {
             }
 
             $result = json_encode($this->data);
-            $file = fopen($this->file_path, 'w');
+            $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = json_encode($result);
+            $this->result = $result;
             break;
 
         case 'DELETE':
