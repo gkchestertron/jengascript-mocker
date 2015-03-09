@@ -129,7 +129,7 @@ class Request {
             $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $result;
+            $this->result = json_encode($model);
             break;
 
         case 'DELETE':
