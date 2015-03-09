@@ -19,12 +19,31 @@ $file = fopen(implode($path, '/'), 'r') or http_response_code(404);
 $file_data = fread($file, filesize(implode($path, '/')));
 fclose($file);
 
+// get
 if ($id) {
     $data = json_decode($file_data);
-    $result = json_encode($data[0]);
+    $model = search($data, 'id', $id);
+    $result = json_encode($model);
 } else {
     $result = $file_data;
 }
 
 echo $result;
+
+function search($array, $key, $value)
+{
+    $results = array();
+
+    if (is_array($array)) {
+        if (isset($array[$key]) && $array[$key] == $value) {
+            $results[] = $array;
+        }
+
+        foreach ($array as $subarray) {
+            $results = array_merge($results, search($subarray, $key, $value));
+        }
+    }
+
+    return $results;
+}
 ?>
