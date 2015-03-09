@@ -105,6 +105,7 @@ class Request {
                 $this->result = $this->file_data;
             }
             break;
+
         case 'POST':
             $last_model = $this->data[sizeof($this->data) - 1];
             $model = $this->rq_params;
@@ -116,11 +117,21 @@ class Request {
             fclose($file);
             $this->result = $result;
             break;
+
         case 'PUT':
-                $model = $this->search($this->data, 'id', $this->id);
-                $model = array_merge($model, $this->rq_params);
-                $this->result = json_encode($this->data);
+            $model = $this->search($this->data, 'id', $this->id);
+
+            foreach ($model as $key => $value) {
+                $model[$key] = $value;
+            }
+
+            $result = json_encode($this->data);
+            $file = fopen($this->file_path, 'w');
+            fwrite($file, $result);
+            fclose($file);
+            $this->result = json_encode($result);
             break;
+
         case 'DELETE':
             break;
         }
