@@ -31,7 +31,7 @@ if ($id) {
 
 echo $result;
 
-public function search(Array $array, $key, $value) {   
+function search(Array $array, $key, $value) {   
     foreach ($array as $subarray){  
         if (isset($subarray[$key]) && $subarray[$key] == $value)
             return $subarray;       
