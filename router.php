@@ -26,6 +26,7 @@ class Request {
 
         $file_path = implode($path, '/');
 
+        echo $file_path;
         if (file_exists($file_path . '.temp')) {
             echo 'here';
             $file = fopen($file_path . '.temp', 'r') or http_response_code(500);
