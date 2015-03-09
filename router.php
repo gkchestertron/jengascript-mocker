@@ -114,6 +114,7 @@ class Request {
             $file = fopen($this->file_path . '.temp', 'w');
             fwrite($file, $result);
             fclose($file);
+            $this->result = $result;
             break;
         case 'PUT':
             break;
