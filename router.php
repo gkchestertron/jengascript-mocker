@@ -142,7 +142,7 @@ class Request {
     }
 
     public function remove($array, $key, $value) {
-        array_filter($array, function($model) use ($key, $value) {
+        return array_filter($array, function($model) use ($key, $value) {
             return $model[$key] != $value;
         });
     }
