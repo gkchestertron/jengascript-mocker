@@ -47,7 +47,7 @@ case 'DELETE':
 }
 
 if ($result) {
-    echo $result;
+    echo 'hello';
 } else {
     http_response_code(404);
 }
