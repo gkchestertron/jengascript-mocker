@@ -115,7 +115,7 @@ class Request {
             $file = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
-            $this->result = $model;
+            $this->result = json_encode($model);
             break;
 
         case 'PUT':
@@ -132,6 +132,9 @@ class Request {
             break;
 
         case 'DELETE':
+            $model = &$this->search($this->data, 'id', $this->id);
+            unset($model);
+            http_response_code(200);
             break;
         }
     }
