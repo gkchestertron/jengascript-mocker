@@ -148,7 +148,7 @@ class Request {
     public function search($array, $key, $value) {   
         foreach ($array as $index => $subarray){  
             if (isset($subarray[$key]) && $subarray[$key] == $value)
-                $this->id_index = $index;
+                $this->id_index = intval($index);
                 return $subarray;       
         } 
     }
