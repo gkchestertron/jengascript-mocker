@@ -125,6 +125,7 @@ class Request {
                 $model[$key] = $value;
             }
 
+            array_push($this->data, $model);
             $result = json_encode($this->data);
             $file   = fopen($this->file_path, 'w');
             fwrite($file, $result);
