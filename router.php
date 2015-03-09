@@ -134,7 +134,7 @@ class Request {
         case 'DELETE':
             $model = &$this->search($this->data, 'id', $this->id);
             unset($model);
-            http_response_code(200);
+            $this->response = json_encode($this->data);
             break;
         }
     }
