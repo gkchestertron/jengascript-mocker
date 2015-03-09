@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 $requestURI = explode('/', $_SERVER['REQUEST_URI']);
 $scriptName = explode('/', $_SERVER['SCRIPT_NAME']);
+$result = null;
 
 // handles case where you are not in home directory
 for ($i= 0; $i < sizeof($scriptName); $i++) {
@@ -33,7 +34,10 @@ case 'GET':
     if ($id) {
         $data   = json_decode($file_data, true);
         $model  = search($data, 'id', $id);
-        $result = json_encode($model);
+
+        if ($model) {
+            $result = json_encode($model);
+        }
     } else {
         $result = $file_data;
     }
@@ -47,7 +51,7 @@ case 'DELETE':
 }
 
 if (isset($result)) {
-    echo gettype($result);
+    echo $result;
 } else {
     http_response_code(404);
 }
