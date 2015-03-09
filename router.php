@@ -4,8 +4,6 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 $request = new Request();
 
-echo file_exists('data.json');
-
 class Request {
     public $rq_uri;
     public $rq_method;
@@ -52,7 +50,6 @@ class Request {
     }
     
     public function processInput() {
-        echo $this->file_data;
         switch ($this->rq_method) {
         case 'GET':
             if ($this->id) {
