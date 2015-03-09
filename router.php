@@ -111,7 +111,7 @@ class Request {
             $model['id'] = $last_model['id'] + 1;
             array_push($this->data, $model);
             $result = json_encode($this->data);
-            $file = fopen($this->file_path . '.temp', 'w');
+            $file = fopen($this->file_path, 'w');
             fwrite($file, $result);
             fclose($file);
             $this->result = $result;
