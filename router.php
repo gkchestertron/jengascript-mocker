@@ -19,6 +19,8 @@ class Request {
     }
 
     public function getData() {
+        echo $this->rq_uri;
+        echo $this->rq_method;
         $path = array_values($this->rq_uri); // path as an array
         $id = array_pop($path); // get id or lack thereof
         $path[sizeof($path) - 1] = $path[sizeof($path) - 1] . '.json';
