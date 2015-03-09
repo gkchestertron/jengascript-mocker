@@ -33,7 +33,7 @@ case 'GET':
     if ($id) {
         $data   = json_decode($file_data, true);
         $model  = search($data, 'id', $id);
-        $result = json_encode($model) or http_response_code(404);
+        $result = json_encode($model);
     } else {
         $result = $file_data;
     }
@@ -46,7 +46,7 @@ case 'DELETE':
     break;
 }
 
-echo $result;
+echo $result or http_response_code(404);
 
 function search($array, $key, $value) {   
     foreach ($array as $subarray){  
