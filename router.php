@@ -21,7 +21,14 @@ $file_path = implode($path, '/');
 if (file_exists($file_path . '.temp')) {
     $file = fopen($file_path. '.temp', 'r') or http_response_code(500);
 } else if (file_exists($file_path)) {
-    $file = fopen($file_path, 'r') or http_response_code(500);
+    $old_file = fopen($file_path, 'r') or http_response_code(500);
+    $new_file = fopen($file_path . '.temp', 'w');
+    
+    $file_data = fread($old_file, filesize($file_path));
+    fwrite($new_file, $file_data);
+    fclose($old_file);
+    fclose($new_file);
+    $file = fopen($file_path. '.temp', 'r') or http_response_code(500);
 } else {
     http_response_code(404);
 }
