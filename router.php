@@ -145,7 +145,7 @@ class Request {
             if ($this->id == 'reset') {
                 unlink($this->file_path);
             } else {
-                $result = json_encode($this->remove($this->data, 'id', $this->id));
+                $result = json_encode(&$this->remove($this->data, 'id', $this->id));
                 $file   = fopen($this->file_path, 'w');
                 fwrite($file, $result);
                 fclose($file);
@@ -155,10 +155,14 @@ class Request {
         }
     }
 
-    public function remove($array, $key, $value) {
-        return array_filter($array, function($model) use ($key, $value) {
-            return $model[$key] != $value;
-        });
+    public function &remove(&$array, $key, $value) {
+        foreach($array as &$model) {
+            if ($model[$key] == $value) {
+                unset($model);
+            }
+        }
+
+        return $array;
     }
 
     public function respond() {
