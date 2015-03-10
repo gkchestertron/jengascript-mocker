@@ -145,7 +145,8 @@ class Request {
             if ($this->id == 'reset') {
                 unlink($this->file_path);
             } else {
-                $result = json_encode(&$this->remove($this->data, 'id', $this->id));
+                $result = &$this->remove($this->data, 'id', $this->id);
+                $result = json_encode($result);
                 $file   = fopen($this->file_path, 'w');
                 fwrite($file, $result);
                 fclose($file);
