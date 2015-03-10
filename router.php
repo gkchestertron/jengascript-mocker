@@ -98,8 +98,8 @@ class Request {
             if ($this->id) {
                 $model  = $this->search($this->data, 'id', $this->id);
 
-                if ($model) {
-                    $this->result = json_encode($model);
+                if ($model[0]) {
+                    $this->result = json_encode($model[0]);
                 }
             } else if (sizeof($this->rq_params) > 0) {
                 $result = array();
