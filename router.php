@@ -178,7 +178,7 @@ class Request {
                 }
             }
             if ($result) {
-                array_push($results, $model);
+                &array_push($results, $model);
             }
         }
 
