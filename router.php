@@ -96,7 +96,7 @@ class Request {
         switch ($this->rq_method) {
         case 'GET':
             if (sizeof($this->rq_params) > 0) {
-                $result = $this->search($this->data, $this->rq_params));
+                $result = $this->search($this->data, $this->rq_params);
                 $this->result = json_encode($result);
             } else if ($this->id) {
                 $model  = $this->search($this->data, array('id' => $this->id));
