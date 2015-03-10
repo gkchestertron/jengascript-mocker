@@ -178,9 +178,11 @@ class Request {
                 }
             }
             if ($result) {
-                array_push($array, $model);
+                array_push($results, $model);
             }
-        };
+        }
+
+        return $results;
     }
 }
 ?>
