@@ -167,7 +167,7 @@ class Request {
         }
     }
 
-    public function &search(&$array, $props) {   
+    public function search($array, $props) {   
         return array_filter($array, function($model) use ($props) {
             $result = true;
             foreach($props as $key => $value) {
