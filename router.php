@@ -106,7 +106,7 @@ class Request {
                 foreach($this->rq_params as $key => $value) {
                     $result = array_merge($result, $this->search($this->data, $key, $value));
                 }
-                $this->result = json_encode($result);
+                $this->result = json_encode($this->rq_params);
             } else {
                 $this->result = $this->file_data;
             }
