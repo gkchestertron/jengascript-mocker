@@ -9,9 +9,9 @@ class Request {
     public $rq_method;
     public $rq_params;
     public $result = null;
-    public $data;
     public $file_data;
     public $file_path;
+    public $data;
     public $id;
 
     public function __construct() {
