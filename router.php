@@ -167,10 +167,10 @@ class Request {
         }
     }
 
-    public function search($array, $props) {   
+    public function &search(&$array, $props) {   
         $results = array();
 
-        foreach($array as $model) {
+        foreach(&$array as &$model) {
             $result = true;
             foreach($props as $key => $value) {
                 if ($model[$key] != $value) {
