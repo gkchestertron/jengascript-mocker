@@ -23,6 +23,14 @@ class Request {
         $this->respond();
     }
 
+    public function &getModel($id) {
+        foreach($this->data as &$model) {
+            if ($model['id'] == $id) {
+                return $model;
+            }
+        }
+    }
+
     public function getData() {
         $path = array_values($this->rq_uri); // path as an array
         $this->id = array_pop($path); // get id or lack thereof
@@ -122,9 +130,7 @@ class Request {
             break;
 
         case 'PUT':
-            $model = &$this->search($this->data, array('id' => $this->id));
-            $model = &$model[0];
-
+            $model = &$this->getModel($this->id);
             foreach ($this->rq_params as $key => $value) {
                 $model[$key] = $value;
             }
@@ -167,7 +173,7 @@ class Request {
         }
     }
 
-    public function &search(&$array, $props) {   
+    public function search($array, $props) {   
         $results = array();
 
         foreach($array as &$model) {
@@ -178,7 +184,7 @@ class Request {
                 }
             }
             if ($result) {
-                &array_push($results, $model);
+                array_push($results, $model);
             }
         }
 
