@@ -168,15 +168,19 @@ class Request {
     }
 
     public function search($array, $props) {   
-        return array_filter($array, function($model) use ($props) {
+        $results = array();
+
+        foreach($array as $model) {
             $result = true;
             foreach($props as $key => $value) {
                 if ($model[$key] != $value) {
                     $result = false;
                 }
             }
-            return $result;
-        });
+            if ($result) {
+                array_push($array, $model);
+            }
+        };
     }
 }
 ?>
