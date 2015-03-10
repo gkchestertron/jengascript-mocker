@@ -174,7 +174,7 @@ class Request {
     }
 
     public function search($array, $props) {   
-        return array_filter($array, function ($model) use ($props) {
+        return array_values(array_filter($array, function ($model) use ($props) {
             $result = true;
 
             foreach($props as $key => $value) {
@@ -184,7 +184,7 @@ class Request {
             }
 
             return $result;
-        });
+        }));
     }
 }
 ?>
