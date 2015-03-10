@@ -176,11 +176,14 @@ class Request {
     public function search($array, $props) {   
         return array_filter($array, function ($model) {
             $result = true;
+
             foreach($props as $key => $value) {
                 if ($model[$key] != $value) {
                     $result = false;
                 }
             }
+
+            return result;
         });
     }
 }
