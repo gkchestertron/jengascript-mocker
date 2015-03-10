@@ -96,13 +96,10 @@ class Request {
         switch ($this->rq_method) {
         case 'GET':
             if (sizeof($this->rq_params) > 0) {
-                $result = array();
-                foreach($this->rq_params as $key => $value) {
-                    $result = array_merge($result, $this->search($this->data, $key, $value));
-                }
+                $result = $this->search($this->data, $this->rq_params));
                 $this->result = json_encode($result);
             } else if ($this->id) {
-                $model  = $this->search($this->data, 'id', $this->id);
+                $model  = $this->search($this->data, array('id' => $this->id));
 
                 if ($model[0]) {
                     $this->result = json_encode($model[0]);
@@ -125,7 +122,7 @@ class Request {
             break;
 
         case 'PUT':
-            $model = &$this->search($this->data, 'id', $this->id);
+            $model = &$this->search($this->data, array('id' => $this->id));
 
             foreach ($this->rq_params as $key => $value) {
                 $model[$key] = $value;
@@ -169,9 +166,15 @@ class Request {
         }
     }
 
-    public function &search(&$array, $key, $value) {   
-        return array_filter($array, function($model) use ($key, $value) {
-            return $model[$key] == $value;
+    public function &search(&$array, $props) {   
+        return array_filter($array, function($model) use ($props) {
+            $result = true;
+            foreach($props as $key => $value) {
+                if ($model[$key] != $value) {
+                    $result = false;
+                }
+            }
+            return $result;
         });
     }
 }
