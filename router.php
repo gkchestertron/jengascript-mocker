@@ -106,14 +106,12 @@ class Request {
             if (sizeof($this->rq_params) > 0) {
                 $result = $this->search($this->data, $this->rq_params);
                 $this->result = json_encode($result);
-                $this->result = 'params';
             } else if ($this->id) {
                 $model  = $this->search($this->data, array('id' => $this->id));
 
-                if ($model[0]) {
-                    $this->result = json_encode($model[0]);
+                if ($model) {
+                    $this->result = json_encode($model);
                 }
-                $this->result = 'id';
             } else {
                 $this->result = $this->file_data;
             }
