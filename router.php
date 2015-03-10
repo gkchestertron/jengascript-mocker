@@ -95,18 +95,18 @@ class Request {
     public function processInput() {
         switch ($this->rq_method) {
         case 'GET':
-            if ($this->id) {
+            if (sizeof($this->rq_params) > 0) {
+                $result = array();
+                foreach($this->rq_params as $key => $value) {
+                    $result = array_merge($result, $this->search($this->data, $key, $value));
+                }
+                $this->result = json_encode($result);
+            } else if ($this->id) {
                 $model  = $this->search($this->data, 'id', $this->id);
 
                 if ($model[0]) {
                     $this->result = json_encode($model[0]);
                 }
-            } else if (sizeof($this->rq_params) > 0) {
-                $result = array();
-                foreach($this->rq_params as $key => $value) {
-                    $result = array_merge($result, $this->search($this->data, $key, $value));
-                }
-                $this->result = json_encode($this->rq_params);
             } else {
                 $this->result = $this->file_data;
             }
