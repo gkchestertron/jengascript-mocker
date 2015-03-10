@@ -174,21 +174,14 @@ class Request {
     }
 
     public function search($array, $props) {   
-        $results = array();
-
-        foreach($array as &$model) {
+        return array_filter($array, function ($model) {
             $result = true;
             foreach($props as $key => $value) {
                 if ($model[$key] != $value) {
                     $result = false;
                 }
             }
-            if ($result) {
-                array_push($results, $model);
-            }
-        }
-
-        return $results;
+        });
     }
 }
 ?>
