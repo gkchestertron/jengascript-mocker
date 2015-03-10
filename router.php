@@ -101,6 +101,12 @@ class Request {
                 if ($model) {
                     $this->result = json_encode($model);
                 }
+            } else if (sizeof($this->rq_params) > 0) {
+                $result = array();
+                foreach($this->rq_params as $key => $value) {
+                    $result = array_merge($result, $this->search($this->data, $key, $value));
+                }
+                $this->result = json_encode($result);
             } else {
                 $this->result = $this->file_data;
             }
@@ -132,10 +138,14 @@ class Request {
             break;
 
         case 'DELETE':
-            $result = json_encode($this->remove($this->data, 'id', $this->id));
-            $file   = fopen($this->file_path, 'w');
-            fwrite($file, $result);
-            fclose($file);
+            if ($this->id == 'reset') {
+                unlink($this->file_path);
+            } else {
+                $result = json_encode($this->remove($this->data, 'id', $this->id));
+                $file   = fopen($this->file_path, 'w');
+                fwrite($file, $result);
+                fclose($file);
+            }
             $this->result = 'DELETED';
             break;
         }
@@ -160,10 +170,9 @@ class Request {
     }
 
     public function &search(&$array, $key, $value) {   
-        foreach ($array as &$subarray){  
-            if (isset($subarray[$key]) && $subarray[$key] == $value)
-                return $subarray;       
-        } 
+        return array_filter($array, function($model) use ($key, $value) {
+            return $model[$key] == $value;
+        });
     }
 }
 ?>
