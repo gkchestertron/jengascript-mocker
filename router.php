@@ -183,7 +183,7 @@ class Request {
                 }
             }
 
-            return result;
+            return $result;
         });
     }
 }
